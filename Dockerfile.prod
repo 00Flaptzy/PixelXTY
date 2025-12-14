@@ -6,13 +6,13 @@ RUN mvn dependency:go-offline -B
 COPY src ./src
 RUN mvn clean package -DskipTests
 
-# Runtime stage
+# Runtime stage - SIMPLE Y FUNCIONAL
 FROM eclipse-temurin:17-jre-alpine
 WORKDIR /app
 COPY --from=builder /app/target/*.jar app.jar
 
-# OBLIGATORIO PARA RENDER
+# Puerto de Render
 EXPOSE 10000
 
-# OBLIGATORIO: Esta línea EXACTA
-ENTRYPOINT ["java", "-Dserver.address=0.0.0.0", "-Dserver.port=10000", "-jar", "app.jar"]
+# ENTRYPOINT SIMPLE - SIN 0.0.0.0
+ENTRYPOINT ["java", "-Dspring.profiles.active=prod", "-jar", "app.jar"]
