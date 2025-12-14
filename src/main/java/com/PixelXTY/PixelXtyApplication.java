@@ -2,32 +2,22 @@ package com.PixelXTY;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.builder.SpringApplicationBuilder;
-import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 
 @SpringBootApplication
-public class PixelXtyApplication extends SpringBootServletInitializer {
-
-    @Override
-    protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-        return application.sources(PixelXtyApplication.class);
-    }
-
+public class PixelXtyApplication {
     public static void main(String[] args) {
-        // Configuración explícita para Render
-        SpringApplication app = new SpringApplication(PixelXtyApplication.class);
+        // DEBUG: Mostrar variables
+        System.out.println("=== ENVIRONMENT VARIABLES ===");
+        System.out.println("PORT: " + System.getenv("PORT"));
+        System.out.println("DB_HOST: " + System.getenv("DB_HOST"));
+        System.out.println("DB_USER: " + System.getenv("DB_USER"));
+        System.out.println("DATABASE_URL: " + System.getenv("DATABASE_URL"));
+        System.out.println("=============================");
         
-        // Forzar que escuche en 0.0.0.0
+        // Forzar configuración
         System.setProperty("server.address", "0.0.0.0");
+        System.setProperty("server.port", "8080");
         
-        // Manejar puerto de Render
-        String port = System.getenv("PORT");
-        if (port != null) {
-            System.setProperty("server.port", port);
-        } else {
-            System.setProperty("server.port", "8080");
-        }
-        
-        app.run(args);
+        SpringApplication.run(PixelXtyApplication.class, args);
     }
 }
