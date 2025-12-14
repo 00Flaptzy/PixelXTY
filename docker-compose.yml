@@ -1,0 +1,29 @@
+version: '3.8'
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: mysql-pixelxty
+    environment:
+      MYSQL_ROOT_PASSWORD: 123
+      MYSQL_DATABASE: gestor_tareas
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+  
+  backend:
+    build: .
+    container_name: pixelxty-app
+    ports:
+      - "8081:8080"
+    environment:
+      PORT: 8080
+      JDBC_DATABASE_URL: jdbc:mysql://mysql-pixelxty:3306/gestor_tareas
+      JDBC_DATABASE_USERNAME: root
+      JDBC_DATABASE_PASSWORD: 123
+      JWT_SECRET: tu_clave_secreta_super_larga
+    depends_on:
+      - mysql
+
+volumes:
+  mysql_data:

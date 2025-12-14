@@ -1,0 +1,23 @@
+# .dockerignore
+target/
+.git/
+.gitignore
+*.iml
+.idea/
+*.log
+*.md
+.mvn/
+mvnw
+mvnw.cmd
+Dockerfile*
+docker-compose*
+.vscode/
+*.jar
+*.war
+*.ear
+*.zip
+*.tar.gz
+*.class
+*.log
+node_modules/
+dist/

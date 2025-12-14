@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: pixelxty-backend
+    runtime: docker
+    dockerfilePath: ./Dockerfile.prod
+    envVars:
+      - key: SPRING_PROFILES_ACTIVE
+        value: prod
+      - key: JWT_SECRET
+        generateValue: true
+      - key: JWT_EXPIRATION
+        value: 86400000
+    healthCheckPath: /actuator/health
+    autoDeploy: true
+    plan: free
