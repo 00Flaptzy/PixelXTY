@@ -38,12 +38,5 @@ public class AuthController {
             @RequestBody LoginRequestDTO dto) {
         return ResponseEntity.ok(authService.login(dto));
     }
-    @GetMapping("/health")
-    public ResponseEntity<Map<String, String>> healthCheck() {
-        Map<String, String> response = new HashMap<>();
-        response.put("status", "UP");
-        response.put("service", "PixelXTY Backend");
-        response.put("timestamp", new Date().toString());
-        return ResponseEntity.ok(response);
-    }
+  
 }
